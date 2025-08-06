@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ employee.full_name }}{% endblock %}
+
+{% block content %}
+<div class="card my-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h1 class="card-title mb-0">{{ employee.full_name }}</h1>
+    </div>
+    <div class="card-body">
+        <p><strong>Job Title:</strong> {{ employee.job_title }}</p>
+        <p><strong>Department:</strong> {{ employee.department|default:"Not Assigned" }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ employee.email }}">{{ employee.email }}</a></p>
+        <p><strong>Phone:</strong> {{ employee.phone_number|default:"N/A" }}</p>
+        <p><strong>Hire Date:</strong> {{ employee.hire_date|date:"F d, Y" }}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to Directory</a>
+        {% if user.is_staff %}
+            <div>
+                <a href="{% url 'employee_edit' employee.pk %}" class="btn btn-warning me-2">Edit</a>
+                <a href="{% url 'employee_delete' employee.pk %}" class="btn btn-danger">Delete</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="card my-4 shadow-sm">
+    <div class="card-header bg-danger text-white">
+        <h2>Confirm Deletion</h2>
+    </div>
+    <div class="card-body">
+        <p>Are you sure you want to delete the employee record for: <strong>{{ employee.full_name }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
